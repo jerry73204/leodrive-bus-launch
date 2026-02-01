@@ -8,3 +8,6 @@
 # Python cache
 *.py[oc]
 __pycache__/
+
+# Downloaded data (large files)
+/data/
