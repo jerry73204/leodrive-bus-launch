@@ -51,9 +51,10 @@ build-applanix:
 clean:
     rm -rf {{repo_root}}/build {{repo_root}}/install {{repo_root}}/log
 
-# Download the Leo Drive Bus-ODD dataset (~10.9GB)
-download output_dir=data_dir:
-    {{script_dir}}/download.sh {{output_dir}}
+# Download dataset (~10.9GB) and Istanbul pointcloud map
+download:
+    {{script_dir}}/download.sh {{data_dir}}
+    {{script_dir}}/download-map.sh {{data_dir}}/istanbul-map
 
 # Migrate rosbag to Autoware 1.5.0 format
 migrate input_bag output_bag:
