@@ -9,5 +9,10 @@
 *.py[oc]
 __pycache__/
 
+# ROS 2 build artifacts
+/build/
+/install/
+/log/
+
 # Downloaded data (large files)
 /data/
