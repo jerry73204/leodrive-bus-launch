@@ -15,4 +15,9 @@ __pycache__/
 /log/
 
 # Downloaded data (large files)
-/data/
+/data/downloads/
+/data/*_compressed/
+/data/*_migrated/
+
+# Istanbul map - track only osm/yaml, ignore pcd symlink
+/data/istanbul-map/pointcloud_map.pcd

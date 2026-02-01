@@ -54,7 +54,11 @@ clean:
 # Download dataset (~10.9GB) and Istanbul pointcloud map
 download:
     {{script_dir}}/download.sh {{data_dir}}
-    {{script_dir}}/download-map.sh {{data_dir}}/istanbul-map
+    {{script_dir}}/download-map.sh
+
+# Download only the Istanbul pointcloud map
+download-map:
+    {{script_dir}}/download-map.sh
 
 # Migrate rosbag to Autoware 1.5.0 format
 migrate input_bag output_bag:

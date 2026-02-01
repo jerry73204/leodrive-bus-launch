@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="minimal_lanelet2_map">
+  <!-- Minimal Lanelet2 map for Autoware logging simulation -->
+  <!-- This is a placeholder - replace with actual map for planning functionality -->
+
+  <!-- Origin point (Istanbul approximate coordinates) -->
+  <node id="-1" lat="41.0082" lon="28.9784">
+    <tag k="ele" v="0"/>
+  </node>
+  <node id="-2" lat="41.0083" lon="28.9784">
+    <tag k="ele" v="0"/>
+  </node>
+  <node id="-3" lat="41.0083" lon="28.9785">
+    <tag k="ele" v="0"/>
+  </node>
+  <node id="-4" lat="41.0082" lon="28.9785">
+    <tag k="ele" v="0"/>
+  </node>
+
+  <!-- Minimal linestrings for a lanelet -->
+  <way id="-10">
+    <nd ref="-1"/>
+    <nd ref="-2"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+  </way>
+  <way id="-11">
+    <nd ref="-4"/>
+    <nd ref="-3"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+  </way>
+
+  <!-- Minimal lanelet -->
+  <relation id="-100">
+    <member type="way" ref="-10" role="left"/>
+    <member type="way" ref="-11" role="right"/>
+    <tag k="type" v="lanelet"/>
+    <tag k="subtype" v="road"/>
+    <tag k="speed_limit" v="50"/>
+    <tag k="location" v="urban"/>
+    <tag k="one_way" v="yes"/>
+  </relation>
+</osm>
