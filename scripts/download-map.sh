@@ -41,11 +41,29 @@ gdown --folder "$GDRIVE_FOLDER_ID" -O "$OUTPUT_DIR"
 
 echo ""
 echo "Download complete: $OUTPUT_DIR"
+
+# Create symlink for pointcloud_map.pcd (Autoware expects this name)
+if [[ ! -f "$OUTPUT_DIR/pointcloud_map.pcd" ]]; then
+    # Use the subsampled version (smaller, faster to load)
+    if [[ -f "$OUTPUT_DIR/route3_ss05.pcd" ]]; then
+        ln -sf route3_ss05.pcd "$OUTPUT_DIR/pointcloud_map.pcd"
+        echo "Created symlink: pointcloud_map.pcd -> route3_ss05.pcd"
+    fi
+fi
+
+# Copy dummy lanelet2_map.osm if not present
+if [[ ! -f "$OUTPUT_DIR/lanelet2_map.osm" ]]; then
+    DUMMY_LANELET="$SCRIPT_DIR/../data/istanbul-map/lanelet2_map.osm"
+    if [[ -f "$DUMMY_LANELET" ]]; then
+        cp "$DUMMY_LANELET" "$OUTPUT_DIR/"
+        echo "Copied dummy lanelet2_map.osm (minimal placeholder)"
+    fi
+fi
+
 echo ""
 echo "Contents:"
 ls -lh "$OUTPUT_DIR"
 
 echo ""
-echo "To use with Autoware, you'll need to:"
-echo "  1. Create a lanelet2_map.osm using Vector Map Builder"
-echo "  2. Place it in $OUTPUT_DIR/lanelet2_map.osm"
+echo "Note: Using dummy lanelet2_map.osm. For planning functionality,"
+echo "      create a proper map using Vector Map Builder."
