@@ -1,0 +1,31 @@
+<launch>
+  <arg name="launch_driver" default="true" description="launch sensor drivers"/>
+  <arg name="vehicle_mirror_param_file" description="path to vehicle mirror position yaml"/>
+  <arg name="pointcloud_container_name" default="pointcloud_container"/>
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
+
+  <group>
+    <!-- LiDAR (only when launch_driver is true) -->
+    <include file="$(find-pkg-share leodrive_bus_sensor_kit_launch)/launch/lidar.launch.xml" if="$(var launch_driver)">
+      <arg name="launch_driver" value="$(var launch_driver)"/>
+      <arg name="vehicle_mirror_param_file" value="$(var vehicle_mirror_param_file)"/>
+      <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
+    </include>
+
+    <!-- IMU (only when launch_driver is true) -->
+    <include file="$(find-pkg-share leodrive_bus_sensor_kit_launch)/launch/imu.launch.xml" if="$(var launch_driver)">
+      <arg name="launch_driver" value="$(var launch_driver)"/>
+    </include>
+
+    <!-- GNSS (only when launch_driver is true) -->
+    <include file="$(find-pkg-share leodrive_bus_sensor_kit_launch)/launch/gnss.launch.xml" if="$(var launch_driver)">
+      <arg name="launch_driver" value="$(var launch_driver)"/>
+    </include>
+
+    <!-- Vehicle Velocity Converter (always needed) -->
+    <include file="$(find-pkg-share autoware_vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
+      <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
+      <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+    </include>
+  </group>
+</launch>

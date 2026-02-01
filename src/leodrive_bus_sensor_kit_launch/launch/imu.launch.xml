@@ -1,0 +1,17 @@
+<launch>
+  <arg name="launch_driver" default="true"/>
+
+  <group>
+    <push-ros-namespace namespace="imu"/>
+
+    <!-- For rosbag playback, IMU data comes from /sensing/imu/imu_data topic -->
+    <!-- No driver needed when launch_driver is false -->
+
+    <!-- IMU corrector (optional, for bias compensation) -->
+    <node pkg="autoware_imu_corrector" exec="imu_corrector_node" name="imu_corrector" if="$(var launch_driver)">
+      <param from="$(find-pkg-share leodrive_bus_sensor_kit_launch)/config/imu_corrector.param.yaml"/>
+      <remap from="input" to="/sensing/imu/imu_data"/>
+      <remap from="output" to="/sensing/imu/imu_data/corrected"/>
+    </node>
+  </group>
+</launch>

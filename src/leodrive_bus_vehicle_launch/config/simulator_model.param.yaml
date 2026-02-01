@@ -1,0 +1,21 @@
+# Simulator model parameters for Leo Drive Bus-ODD dataset
+# Isuzu bus platform
+
+/**:
+  ros__parameters:
+    simulated_frame_id: "base_link"
+    origin_frame_id: "map"
+    vehicle_model_type: "DELAY_STEER_ACC_GEARED"
+    initialize_source: "INITIAL_POSE_TOPIC"
+    timer_sampling_time_ms: 25
+    add_measurement_noise: false
+
+    # Vehicle model parameters (typical bus values)
+    vel_lim: 22.22      # 80 km/h max speed
+    vel_rate_lim: 2.0   # Acceleration limit [m/s^2]
+    steer_lim: 0.6      # Max steering angle [rad]
+    steer_rate_lim: 0.3 # Steering rate limit [rad/s]
+    acc_time_delay: 0.3
+    acc_time_constant: 0.3
+    steer_time_delay: 0.3
+    steer_time_constant: 0.3

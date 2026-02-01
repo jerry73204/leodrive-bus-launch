@@ -1,0 +1,19 @@
+<launch>
+  <arg name="launch_driver" default="true"/>
+
+  <group>
+    <push-ros-namespace namespace="gnss"/>
+
+    <!-- For rosbag playback, GNSS data comes from /gnss/fix topic -->
+    <!-- Applanix INS data comes from /lvx_client/gsof/* topics -->
+    <!-- No driver needed when launch_driver is false -->
+
+    <!-- GNSS poser (always needed to convert NavSatFix to PoseWithCovarianceStamped) -->
+    <include file="$(find-pkg-share autoware_gnss_poser)/launch/gnss_poser.launch.xml">
+      <arg name="input_topic_fix" value="/gnss/fix"/>
+      <arg name="output_topic_gnss_pose" value="/sensing/gnss/pose"/>
+      <arg name="output_topic_gnss_pose_cov" value="/sensing/gnss/pose_with_covariance"/>
+      <arg name="output_topic_gnss_fixed" value="/sensing/gnss/fixed"/>
+    </include>
+  </group>
+</launch>

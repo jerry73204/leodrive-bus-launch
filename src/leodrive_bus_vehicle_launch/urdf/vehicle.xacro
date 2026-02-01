@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="leodrive_bus" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="config_dir" default="$(find leodrive_bus_vehicle_launch)/config"/>
+
+  <!-- Vehicle body -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="12.0 2.5 3.2"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 0.8"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="12.0 2.5 3.2"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Sensor kit base link -->
+  <xacro:include filename="$(find leodrive_bus_sensor_kit_launch)/urdf/sensor_kit.xacro"/>
+  <xacro:property name="sensors_calibration" value="${xacro.load_yaml('$(find leodrive_bus_sensor_kit_launch)/config/sensors_calibration.yaml')}"/>
+  <xacro:sensor_kit_macro
+    parent="base_link"
+    x="${sensors_calibration['base_link']['sensor_kit_base_link']['x']}"
+    y="${sensors_calibration['base_link']['sensor_kit_base_link']['y']}"
+    z="${sensors_calibration['base_link']['sensor_kit_base_link']['z']}"
+    roll="${sensors_calibration['base_link']['sensor_kit_base_link']['roll']}"
+    pitch="${sensors_calibration['base_link']['sensor_kit_base_link']['pitch']}"
+    yaw="${sensors_calibration['base_link']['sensor_kit_base_link']['yaw']}"
+  />
+</robot>

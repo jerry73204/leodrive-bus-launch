@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
+
+  <!-- For rosbag playback, no vehicle interface driver is needed -->
+  <!-- Vehicle status comes from the recorded topics -->
+</launch>

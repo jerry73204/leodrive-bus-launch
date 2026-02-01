@@ -1,0 +1,12 @@
+# Sensors calibration relative to base_link
+# For Leo Drive Bus-ODD dataset (Isuzu bus platform)
+# Note: For rosbag playback, TF data comes from the recorded /tf_static topic
+
+base_link:
+  sensor_kit_base_link:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
