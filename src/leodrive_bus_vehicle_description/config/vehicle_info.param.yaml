@@ -1,0 +1,16 @@
+# Vehicle info for Leo Drive Bus-ODD dataset
+# Isuzu bus platform
+# Note: These are approximate values for a typical city bus
+
+/**:
+  ros__parameters:
+    wheel_radius: 0.5          # Bus wheel radius (estimate)
+    wheel_width: 0.3           # Bus tire width (estimate)
+    wheel_base: 6.0            # Wheelbase (front to rear axle) - typical for city bus
+    wheel_tread: 2.1           # Track width (estimate)
+    front_overhang: 2.5        # Front overhang (estimate)
+    rear_overhang: 3.0         # Rear overhang (estimate)
+    left_overhang: 0.3         # Side overhang (estimate)
+    right_overhang: 0.3        # Side overhang (estimate)
+    vehicle_height: 3.2        # Bus height (estimate)
+    max_steer_angle: 0.6       # Max steering angle [rad] (~34 degrees)
