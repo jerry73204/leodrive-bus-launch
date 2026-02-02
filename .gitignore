@@ -21,3 +21,7 @@ __pycache__/
 
 # Istanbul map - track only osm/yaml, ignore pcd symlink
 /data/istanbul-map/pointcloud_map.pcd
+
+# Runtime files
+play_log/
+record.json

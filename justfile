@@ -112,3 +112,19 @@ play bag_path:
     source /opt/ros/humble/setup.bash
     source {{install_dir}}/setup.bash 2>/dev/null || true
     ros2 bag play {{bag_path}}
+
+# Run logging simulation (localization only, no perception/planning/control)
+sim-logging bag_path=(data_dir / "all-sensors-bag1_migrated"):
+    {{script_dir}}/sim-logging.sh {{bag_path}} {{data_dir}}/istanbul-map
+
+# Run logging simulation with all modules
+sim-logging-full bag_path=(data_dir / "all-sensors-bag1_migrated"):
+    #!/usr/bin/env bash
+    source /opt/ros/humble/setup.bash
+    source /opt/autoware/1.5.0/setup.bash
+    source {{install_dir}}/setup.bash
+    play_launch launch autoware_launch logging_simulator.launch.xml \
+        map_path:={{data_dir}}/istanbul-map \
+        vehicle_model:=leodrive_bus_vehicle \
+        sensor_model:=leodrive_bus_sensor_kit \
+        rviz:=true
