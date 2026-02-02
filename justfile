@@ -53,16 +53,16 @@ clean:
 
 # Download dataset (~10.9GB) and Istanbul pointcloud map
 download:
-    {{script_dir}}/download.sh {{data_dir}}
-    {{script_dir}}/download-map.sh
+    {{script_dir}}/dataset/download.sh {{data_dir}}
+    {{script_dir}}/dataset/download-map.sh
 
 # Download only the Istanbul pointcloud map
 download-map:
-    {{script_dir}}/download-map.sh
+    {{script_dir}}/dataset/download-map.sh
 
 # Migrate rosbag to Autoware 1.5.0 format
 migrate input_bag output_bag:
-    {{script_dir}}/migrate-to-autoware15.py {{input_bag}} {{output_bag}}
+    {{script_dir}}/dataset/migrate-to-autoware15.py {{input_bag}} {{output_bag}}
 
 # Migrate all downloaded rosbags to Autoware 1.5.0 format
 migrate-all data_dir_arg=data_dir:
@@ -90,7 +90,7 @@ migrate-all data_dir_arg=data_dir:
             skipped=$((skipped + 1))
         else
             echo "[MIGRATE] $name"
-            {{script_dir}}/migrate-to-autoware15.py "$bag" "$output"
+            {{script_dir}}/dataset/migrate-to-autoware15.py "$bag" "$output"
             migrated=$((migrated + 1))
             echo ""
         fi
@@ -115,7 +115,7 @@ play bag_path:
 
 # Run logging simulation (localization only, no perception/planning/control)
 sim-logging bag_path=(data_dir / "all-sensors-bag1_migrated"):
-    {{script_dir}}/sim-logging.sh {{bag_path}} {{data_dir}}/istanbul-map
+    {{script_dir}}/simulation/sim-logging.sh {{bag_path}} {{data_dir}}/istanbul-map
 
 # Run logging simulation with all modules
 sim-logging-full bag_path=(data_dir / "all-sensors-bag1_migrated"):

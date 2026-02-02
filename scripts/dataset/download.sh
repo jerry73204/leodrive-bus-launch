@@ -14,7 +14,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 OUTPUT_DIR="${1:-$REPO_ROOT/data}"
 S3_BUCKET="s3://autoware-files/collected_data/2022-08-22_leo_drive_isuzu_bags/"
